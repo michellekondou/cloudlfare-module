@@ -66,12 +66,13 @@ class Cloudflare_mk_mcp {
 		$vars['base_url'] 				= $this->base_url;
  		$vars['cloudflare_email']		= $this->cf->cloudflare_email;
 		$vars['cloudflare_key']			= $this->cf->cloudflare_key;
-		$vars['get_cloudflare_domains']	= $this->cf->get_zone_names();
-		$vars['cloudflare_domain']		= $this->cf->get_stored_domain();
-		$vars['purge_urls']				= $this->cf->get_stored_purge_urls();
-		$vars['purge_urls_array']		= $this->cf->purge_urls_array($vars['purge_urls']); 
-		$vars['zone_id']				= $this->cf->get_zone_id();
-
+		if($this->cf->has_settings) {
+			$vars['get_cloudflare_domains']	= $this->cf->get_zone_names();
+			$vars['cloudflare_domain']		= $this->cf->get_stored_domain();
+			$vars['purge_urls']				= $this->cf->get_stored_purge_urls();
+			$vars['purge_urls_array']		= $this->cf->purge_urls_array($vars['purge_urls']); 
+			$vars['zone_id']				= $this->cf->get_zone_id();
+		}
 		$vars['message'] = $this->EE->session->flashdata('message')?$this->EE->session->flashdata('message'):'';
 
 		// cloudflare has not been setup yet
